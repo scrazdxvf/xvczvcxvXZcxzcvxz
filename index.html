@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>СКР БАРАХОЛКА</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+      /* Custom scrollbar for webkit browsers */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1; /* Light mode track */
+        border-radius: 10px;
+      }
+      .dark ::-webkit-scrollbar-track {
+        background: #2d3748; /* Dark mode track (slate-800) */
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #888; /* Light mode thumb */
+        border-radius: 10px;
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #555; /* Dark mode thumb */
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Light mode thumb hover */
+      }
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: #333; /* Dark mode thumb hover */
+      }
+      /* Basic animation for logo text float */
+      @keyframes logo-float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-3px); }
+      }
+      .animate-logo-float {
+        animation: logo-float 3s ease-in-out infinite;
+      }
+      body {
+        overscroll-behavior-y: contain; /* Prevents pull-to-refresh on mobile if desired */
+      }
+      #app-loading-indicator, #telegram-sdk-error-overlay {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0,0,0,0.75);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        padding: 20px;
+        text-align: center;
+        font-family: sans-serif;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        darkMode: 'class', 
+        theme: {
+          extend: {
+            colors: {
+              'dark-primary': '#1a202c', // slate-900
+              'dark-secondary': '#2d3748', // slate-800
+              'dark-accent': '#38bdf8', // sky-400 (a bit brighter for dark mode accent)
+              'dark-text-primary': '#e2e8f0', // slate-200
+              'dark-text-secondary': '#a0aec0', // slate-400
+              
+              'light-primary': '#ffffff', // white
+              'light-secondary': '#f1f5f9', // slate-100
+              'light-accent': '#0ea5e9', // sky-500
+              'light-text-primary': '#1e293b', // slate-800
+              'light-text-secondary': '#64748b', // slate-500
+            },
+            aspectRatio: {
+              '4/3': '4 / 3',
+              '16/9': '16 / 9',
+              '1/1': '1 / 1',
+            },
+          }
+        }
+      }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.6.2",
+    "firebase_app_module": "https://esm.sh/firebase@^11.9.0/app",
+    "firebase_firestore_module": "https://esm.sh/firebase@^11.9.0/firestore",
+    "firebase/": "https://esm.sh/firebase@^11.9.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-light-primary dark:bg-dark-primary">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+       <!-- App loading indicator can be placed here if needed before React mounts -->
+      <div id="app-loading-indicator" style="display: none; background-color: var(--light-primary, #fff); color: var(--light-text-primary, #000);">
+        <p>Загрузка приложения...</p>
+      </div>
+    </div>
+     <div id="telegram-sdk-error-overlay" style="display: none;">
+      <h1 style="font-size: 1.5em; margin-bottom: 10px;">Ошибка инициализации Telegram</h1>
+      <p id="telegram-sdk-error-message" style="margin-bottom: 15px;">Не удалось загрузить данные пользователя Telegram. Приложение может работать некорректно.</p>
+      <p style="font-size: 0.8em;">Пожалуйста, убедитесь, что вы открываете приложение через Telegram, или попробуйте перезапустить Mini App.</p>
+    </div>
+
+    <!-- Main script will be injected by the build process -->
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
